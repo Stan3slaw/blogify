@@ -2,6 +2,7 @@ import type { Express } from 'express';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 import appRouter from './common/router';
 
@@ -12,6 +13,7 @@ const app: Express = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 app.use('/', appRouter);
 
