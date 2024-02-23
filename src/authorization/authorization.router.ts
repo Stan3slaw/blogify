@@ -5,6 +5,7 @@ import { RegisterUserDto } from './dto/register-user.dto';
 import { errorHandler } from '../common/utils/error-handler.util';
 import authorizationController from './authorization.controller';
 import { LoginUserDto } from './dto/login-user.dto';
+import { authorizationMiddleware } from './middlewares/authorization.middleware';
 
 const authorizationRouter = Router();
 
@@ -20,6 +21,7 @@ authorizationRouter.post(
 );
 authorizationRouter.post(
   '/currentUser',
+  errorHandler(authorizationMiddleware),
   errorHandler(authorizationController.getCurrentUser),
 );
 

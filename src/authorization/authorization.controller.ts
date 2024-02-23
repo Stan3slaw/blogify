@@ -25,7 +25,7 @@ class AuthorizationController {
   }
 
   async getCurrentUser(req: Request, res: Response): Promise<void> {
-    const currentUser = await authorizationService.login(req.user.id);
+    const currentUser = await authorizationService.getCurrentUser(req.user.id);
     res.send(currentUser);
   }
 }

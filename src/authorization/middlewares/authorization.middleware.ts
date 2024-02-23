@@ -22,13 +22,13 @@ export async function authorizationMiddleware(
     const decoded = verify(token, JWT_SECRET) as JwtPayload;
 
     if (!decoded || !decoded.id) {
-      throw new HttpException('UserId not found', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
 
     const user = await userService.findOneById(decoded.id);
 
     if (!user) {
-      throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
 
     req.user = user;
@@ -36,6 +36,6 @@ export async function authorizationMiddleware(
   } catch (error) {
     console.error(error);
 
-    throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
   }
 }
